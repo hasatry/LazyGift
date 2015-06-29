@@ -21,7 +21,7 @@ public interface OrderManagerService {
 	 * @param pos
 	 * @return
 	 */
-	public boolean purchaseGoods(long orderId, Position pos);
+	public boolean savePurchaseGoods(long orderId, Position pos);
 
 	public boolean saveOrder(OrderDO order);
 	

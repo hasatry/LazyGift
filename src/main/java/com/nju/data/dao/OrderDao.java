@@ -22,7 +22,7 @@ public interface OrderDao {
 	 * @param state
 	 * @return
 	 */
-	public long changeState(long orderId, int state);
+	public long saveState(long orderId, int state);
 
 	public void save(OrderDO order);
 	

@@ -25,9 +25,9 @@ public class OrderManagerServiceImpl implements OrderManagerService{
 	
 
 	@Override
-	public boolean purchaseGoods(long orderId, Position pos) {
+	public boolean savePurchaseGoods(long orderId, Position pos) {
 		// TODO Auto-generated method stub
-		long goodsId =  orderDao.changeState(orderId, 1);
+		long goodsId =  orderDao.saveState(orderId, 1);
 		if(goodsId != -1){
 			goodsDao.updateGoodsWithPos(goodsId, pos);
 			return true;

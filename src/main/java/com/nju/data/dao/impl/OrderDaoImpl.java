@@ -36,7 +36,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao{
 	
 
 	@Override
-	public long changeState(long orderId, int state) {
+	public long saveState(long orderId, int state) {
 		// TODO Auto-generated method stub		
 		try {
         	OrderDO instance = (OrderDO) getHibernateTemplate()
