@@ -69,8 +69,8 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao{
 	@SuppressWarnings("unchecked")
 	public OrderDO findOrderById(int orderId) {
 		long id = (long) orderId;
-//		String sql = "from OrderDO where id = '"+id+"'";
-		String sql = "from OrderDO where id = 1";
+		String sql = "from OrderDO where id = '"+id+"'";
+		// String sql = "from OrderDO where id = 1";
 		Session se = this.currentSession();	
 		Query q = se.createQuery(sql);		
 		List<OrderDO> result = q.list();
