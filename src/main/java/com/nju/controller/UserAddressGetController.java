@@ -27,6 +27,7 @@ public class UserAddressGetController {
 		String username = request.getParameter("USER_ID");
 		
 		UserAddressDO user_addr = userAddressService.getDefaultAddress(username);
+//		user_addr = new UserAddressDO("admin","ºº¿ÚÂ·","ÄÏÔ°1Éá","603",true);
 		System.out.println("Get Default Address!!!");
 		String default_address = user_addr.getStreet()+", " + user_addr.getBuilding() 
 				+ ", " + user_addr.getRoom() ;

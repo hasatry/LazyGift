@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.nju.data.dao.GoodsDao;
 import com.nju.data.dataobject.OrderDO;
 import com.nju.model.Order;
+import com.nju.model.converter.OrderConventer;
 import com.nju.service.OrderManagerService;
 import com.nju.util.data.Position;
 import com.nju.data.dao.OrderDao;
@@ -24,15 +25,22 @@ public class OrderManagerServiceImpl implements OrderManagerService{
 	
 
 	@Override
-	public boolean BuyGoods(long orderId, Position pos) {
+	public boolean savePurchaseGoods(long orderId, Position pos) {
 		// TODO Auto-generated method stub
+		long goodsId =  orderDao.saveState(orderId, 1);
+		if(goodsId != -1){
+			goodsDao.updateGoodsWithPos(goodsId, pos);
+			return true;
+		}
+		
 		return false;
 	}
 
 	@Override
-	public List<Order> getOrdersByStaffId(long staffId, int[] states) {
+	public List<Order> getUntreatedOrder(long staffId) {
 		// TODO Auto-generated method stub
-		return null;
+		List<OrderDO> doList = orderDao.getOrderByStaffIdandState(staffId, 0);
+		return OrderConventer.ConvertFromOrderDOList(doList);
 	}
 
 	@Override

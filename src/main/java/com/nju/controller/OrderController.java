@@ -30,20 +30,62 @@ public class OrderController {
 	private GoodService goodsService;
 	
 	@RequestMapping(value = "/confirmOrderSubmit",method = RequestMethod.POST) 
-	public void teamLogin(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+	public void confirmOrderSubmit(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+
 		ResponseBuilder rb = new ResponseBuilder();
 		long userId = 0 ;
-		String totalPrice = request.getParameter("orderPrice");
- 		double total_price = Double.parseDouble(totalPrice);
- 		Timestamp deliveryTime = DateUtil.getTime("2015-06-01 15:50");
-		String orderDestiantion = request.getParameter("orderDestiantion");
-		String orderGoodsName = request.getParameter("orderGoodsName");
-//		GoodsDO orderGoods = goodsService.getGoodsByName(orderGoodsName);
-//		long goods_id = orderGoods.getId();
+		double total_price = 0.0;
+		Timestamp deliveryTime = null;
 		long goods_id = 1;
 		int state = 1;//代表订单生成
+		String totalPrice = request.getParameter("totalPrice");
+		if(!totalPrice.equals(null)&&!totalPrice.equals("")){
+			total_price = Double.parseDouble(totalPrice);
+		}else{
+			try {
+				rb.writeJsonResponse(response, "价格不能为空");
+				return;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+ 		}
+  		String deliveryTimeStr = request.getParameter("deliveryTime");
+		if(!deliveryTimeStr.equals(null)&&!deliveryTimeStr.equals("")){
+			System.out.println("货物需要送达时间为："+deliveryTimeStr);
+	 		deliveryTime = DateUtil.getTime(deliveryTimeStr);//格式如下："2015-06-01 15:50"
+		}else{
+			try {
+				rb.writeJsonResponse(response, "送达时间不能为空");
+				return;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+ 		} 		
+		String orderDestiantion = request.getParameter("destination");
+		if(orderDestiantion.equals(null)||orderDestiantion.equals("")){
+			try {
+				rb.writeJsonResponse(response, "目的地址不能为空");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		String orderGoodsName = request.getParameter("goodsName");
+		if(!orderGoodsName.equals(null)&&!orderGoodsName.equals("")){
+			System.out.println("需要购买的货物名称为："+orderGoodsName);
+			GoodsDO orderGoods = goodsService.getGoodsByName(orderGoodsName);
+			goods_id = (orderGoods==null)?0:orderGoods.getId();
+		}else{
+			try {
+				rb.writeJsonResponse(response, "要购买的货物名称不能为空");
+				return;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+ 		}
+
+
 		Timestamp orderStartTime = new Timestamp(new Date().getTime());
-		String remark = "备注";
+		String remark = request.getParameter("remarks");
  		OrderDO order = new OrderDO(userId,total_price,deliveryTime,orderDestiantion,goods_id,state,orderStartTime,remark);
          try {
         	System.out.println("保存新的订单到数据库");
