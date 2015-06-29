@@ -27,4 +27,5 @@ public interface OrderDao {
 	public void save(OrderDO order);
 	
 	public OrderDO findOrderById(int orderId);
+	public String getHotLocation(int rankBegin, int rankEnd, String dateBegin, String dateEnd);
 }

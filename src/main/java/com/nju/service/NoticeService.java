@@ -8,5 +8,5 @@ import java.util.List;
  * Created by liveangel on 15-6-29.
  */
 public interface NoticeService {
-    public List<Order> getHistoryLocation(int begin, int end, String dateBegin, String dateEnd);
+    public String getHistoryLocation(int begin, int end, String dateBegin, String dateEnd);
 }

@@ -1,9 +1,14 @@
 package com.nju.data.dao.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Projections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
@@ -78,5 +83,34 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao{
 		
 		return result.size()==0?null:result.get(0);
 	}
-	
+
+	public String getHotLocation(int rankBegin, int rankEnd, String dateBegin, String dateEnd) {
+		Session sess = this.currentSession();
+		List list = null;
+		String result = "";
+		List l1 = null;
+		if (sess != null) {
+			String sql = "from OrderDO o where o.createTime between :firstDate and :endDate";
+			String sql1 = "select o.remark, count(*) from OrderDO o where createTime between :firstDate and :endDate group by o.remark order by count(*) desc";
+			l1 = sess.createQuery(sql1).setString("firstDate", dateBegin).setString("endDate", dateEnd).list();
+
+
+		}
+		if (l1!=null){
+			Iterator iter =l1.iterator();
+			if(!iter.hasNext()){
+				System.out.println("No objects to display.");
+			}
+			while(iter.hasNext()){
+				System.out.println("New object");
+				Object[] obj = (Object[]) iter.next();
+				for (int i = 0; i < obj.length; i++) {
+					result+=obj[i];
+				}
+			}
+
+		}
+		return result;
+	}
+
 }
