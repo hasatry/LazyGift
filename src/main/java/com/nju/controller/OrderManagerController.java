@@ -51,7 +51,7 @@ public class OrderManagerController {
 		String id = request.getParameter("id");
 		
 		int i = Integer.parseInt(id);
-		orderManagerService.purchaseGoods(i, new Position());
+		orderManagerService.savePurchaseGoods(i, new Position());
 		
 		try {
 			rb.writeJsonResponse(response, re);
