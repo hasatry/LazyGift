@@ -5,6 +5,7 @@ import java.util.List;
 import com.nju.data.dao.GoodsDao;
 import com.nju.data.dataobject.GoodsDO;
 import com.nju.model.Good;
+import com.nju.util.data.Position;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -51,6 +52,12 @@ public class GoodsDaoImpl extends HibernateDaoSupport implements GoodsDao{
 		// TODO Auto-generated method stub
 		this.getHibernateTemplate().save(goods);
 		
+	}
+
+	@Override
+	public boolean updateGoodsWithPos(long goodsId, Position pos) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -21,10 +21,37 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao{
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<OrderDO> getOrderByStaffIdandState(long staffId, int[] states) {
+	public List<OrderDO> getOrderByStaffIdandState(long staffId, int state) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		String sql = "from OrderDO where staffId = "+staffId+" and state = "+state;
+		Session se = this.currentSession();	
+		Query q = se.createQuery(sql);		
+		List<OrderDO> result = q.list();
+		
+		return result;
+	}
+	
+
+	@Override
+	public long saveState(long orderId, int state) {
+		// TODO Auto-generated method stub		
+		try {
+        	OrderDO instance = (OrderDO) getHibernateTemplate()
+                    .get("com.nju.data.dataobject.OrderDO", orderId);
+        	if(instance == null)
+        		return -1;
+        	else{
+        		instance.setState(state);
+        		getHibernateTemplate().save(instance);
+        		return instance.getGoodsId();
+        	}
+        } catch (RuntimeException re) {
+            log.error("get failed", re);
+            throw re;
+        }
 	}
 
 	@Override
@@ -51,6 +78,5 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao{
 		
 		return result.size()==0?null:result.get(0);
 	}
-	
 	
 }
