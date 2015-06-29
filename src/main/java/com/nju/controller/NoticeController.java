@@ -27,10 +27,10 @@ public class NoticeController {
         String rankEnd = request.getParameter("rankEnd");
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
-        String reTest = rankTop+beginDate+rankEnd+endDate;
+        String result = noticeService.getHistoryLocation(Integer.parseInt(rankTop),Integer.parseInt(rankEnd),beginDate,endDate);
 
         try {
-            rb.writeJsonResponse(response, reTest);
+            rb.writeJsonResponse(response, result);
         } catch (IOException e) {
             e.printStackTrace();
         }
