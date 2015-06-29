@@ -141,6 +141,6 @@
 
 		<property name="maxUploadSize" value="2000000000" />
 	</bean>
-	
+	<bean id="SpringStartupServlet" class="com.nju.util.SpringStartupServlet"></bean>
 
 </beans>
