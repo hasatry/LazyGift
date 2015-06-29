@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.nju.data.dataobject.GoodsDO;
+import com.nju.service.GoodService;
 import com.nju.service.UserAddressService;
 
 @Controller
@@ -20,13 +22,25 @@ public class SpringStartupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	private UserAddressService userAddressService;
-	
+	@Autowired
+	private GoodService goodsService;
 	@Override
 	public void init() throws ServletException {
 //		String user, String street, String building,String room
 		if(userAddressService.getDefaultAddress("admin")==null){
-			userAddressService.setDefaultAddress("admin", "汉口路", "1舍", "603");
-			
+			userAddressService.setDefaultAddress("admin", "汉口路", "1舍", "603");			
+		}
+		
+//		long id, int level, long parentId, String name, String pos, String remark,int num
+		if(goodsService.getGoodsByName("ABC")==null){			
+			GoodsDO goods = new GoodsDO();
+			goods.setLevel(1);
+			goods.setParentId(0);
+			goods.setName("ABC");
+			goods.setPos("好又多");
+			goods.setRemark("货物Goods,root，无父类");
+			goods.setNum(12);
+			goodsService.saveGoods(goods);
 		}
 		
 	}
