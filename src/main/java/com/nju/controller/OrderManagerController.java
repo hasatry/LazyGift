@@ -26,7 +26,7 @@ public class OrderManagerController {
 	
 //	private List<Order> list = null;
 	
-	@RequestMapping(value = "/getorderlist",method = RequestMethod.GET)
+	@RequestMapping(value = "/getorderlist",method = RequestMethod.POST)
 	public void getOrderList(HttpServletRequest request, HttpServletResponse response, ModelMap model){		
 		ResponseBuilder rb = new ResponseBuilder();
 		
@@ -42,7 +42,7 @@ public class OrderManagerController {
 		}
 	}
 	
-	@RequestMapping(value = "/buyorder",method = RequestMethod.GET)
+	@RequestMapping(value = "/buyorder",method = RequestMethod.POST)
 	public void buyOrder(HttpServletRequest request, HttpServletResponse response, ModelMap model){		
 		ResponseBuilder rb = new ResponseBuilder();
 		
