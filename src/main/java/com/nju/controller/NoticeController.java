@@ -27,7 +27,8 @@ public class NoticeController {
         String rankEnd = request.getParameter("rankEnd");
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
-        String result = noticeService.getHistoryLocation(Integer.parseInt(rankTop),Integer.parseInt(rankEnd),beginDate,endDate);
+        String result = "rankTop"+rankTop+"rankEnd"+rankEnd+"beginDate"+beginDate+"endDate"+endDate;
+        //String result = noticeService.getHistoryLocation(Integer.parseInt(rankTop),Integer.parseInt(rankEnd),beginDate,endDate);
 
         try {
             rb.writeJsonResponse(response, result);
