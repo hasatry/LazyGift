@@ -12,8 +12,8 @@ import java.util.List;
  * Created by liveangel on 15-6-29.
  */
 public class NoticeServiceImpl implements NoticeService {
-    //@Autowired
-    private OrderDao orderDao = new OrderDaoImpl();
+    @Autowired
+    private OrderDao orderDao;
 
     @Override
     public String getHistoryLocation(int begin, int end, String dateBegin, String dateEnd) {

@@ -19,8 +19,8 @@ import java.io.IOException;
 
 @Controller
 public class NoticeController {
-    //@Autowired
-    private NoticeService noticeService = new NoticeServiceImpl();
+    @Autowired
+    private NoticeService noticeService ;
 
     @RequestMapping(value = "/notice", method = RequestMethod.POST)
     public void getLocationRank(HttpServletRequest request, HttpServletResponse response, ModelMap model){
@@ -44,12 +44,12 @@ public class NoticeController {
         ResponseBuilder rb = new ResponseBuilder();
         Boolean isSuccess = true;
 
+        int rankTop = 1;
+        int rankEnd = 2;
+        String beginDate = "";
+        String endDate="";
 
-        String rankTop = request.getParameter("rankTop");
-        String rankEnd = request.getParameter("rankEnd");
-        String beginDate = request.getParameter("beginDate");
-        String endDate = request.getParameter("endDate");
-        String result = noticeService.getHistoryLocation(Integer.parseInt(rankTop),Integer.parseInt(rankEnd),beginDate,endDate);
+        String result = noticeService.getHistoryLocation(rankTop,rankEnd,beginDate,endDate);
         if(result==null){
             result="查找不到数据";
         }
