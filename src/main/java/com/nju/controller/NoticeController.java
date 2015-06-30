@@ -46,7 +46,9 @@ public class NoticeController {
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
         String result = noticeService.getHistoryLocation(Integer.parseInt(rankTop),Integer.parseInt(rankEnd),beginDate,endDate);
-
+        if(result==null){
+            result="查找不到数据";
+        }
         try {
             rb.writeJsonResponse(response, result);
         } catch (IOException e) {
