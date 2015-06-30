@@ -1,6 +1,7 @@
 package com.nju.controller;
 
 import com.nju.service.NoticeService;
+import com.nju.service.impl.NoticeServiceImpl;
 import com.nju.util.ResponseBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,8 @@ import java.io.IOException;
 
 @Controller
 public class NoticeController {
-    @Autowired
-    private NoticeService noticeService;
+    //@Autowired
+    private NoticeService noticeService = new NoticeServiceImpl();
 
     @RequestMapping(value = "/notice", method = RequestMethod.POST)
     public void getLocationRank(HttpServletRequest request, HttpServletResponse response, ModelMap model){
