@@ -35,9 +35,9 @@ public class GoodServiceImpl implements GoodService{
 	}
 
 	@Override
-	public List<Good> getGoodsList() {
+	public GoodsDO getGoodsList(int id) {
 		// TODO Auto-generated method stub
-		List<Good> list = goodsDao.getGoodsList();
+		GoodsDO list = goodsDao.getGoodsList(id);
 		return list;
 	}
 	

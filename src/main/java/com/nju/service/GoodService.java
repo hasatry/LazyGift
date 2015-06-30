@@ -7,7 +7,7 @@ import com.nju.model.Good;
 
 public interface GoodService {
 	
-	List<Good> getGoodsList();
+	GoodsDO getGoodsList(int id);
 
 	GoodsDO getGoodsByName(String orderGoodsName);
 

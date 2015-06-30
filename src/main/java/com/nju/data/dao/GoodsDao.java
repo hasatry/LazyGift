@@ -7,7 +7,7 @@ import com.nju.model.Good;
 import com.nju.util.data.Position;
 
 public interface GoodsDao {
-	List<Good> getGoodsList();
+	GoodsDO getGoodsList(int id);
 
 	GoodsDO findGoodsByGoodsName(String orderGoodsName);
 
