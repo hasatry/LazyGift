@@ -13,15 +13,16 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 public class GoodsDaoImpl extends HibernateDaoSupport implements GoodsDao{
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Good> getGoodsList() {
+	public GoodsDO getGoodsList(int id) {
 		
-		String sql = "from Goods";
+		String sql = "from GoodsDO where id = '"+id+"'";
 		Session se = this.currentSession();
 		Query qu = se.createQuery(sql);
-		List<Good> list = (List<Good>)qu.list();
+		List<GoodsDO> list = (List<GoodsDO>)qu.list();
 		
-		return list;
+		return list.size()==0?null:list.get(0);
 	}
 
 	@SuppressWarnings("unchecked")

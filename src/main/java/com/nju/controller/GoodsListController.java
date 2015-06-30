@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.nju.data.dataobject.GoodsDO;
 import com.nju.model.Good;
 import com.nju.service.GoodService;
 import com.nju.util.ResponseBuilder;
@@ -21,18 +22,17 @@ public class GoodsListController {
 	
 	@Autowired
 	private GoodService goodService;
-	private List<Good> list = null;
+	
 	
 	@RequestMapping(value = "/getGoods",method = RequestMethod.POST)
 	public void getGoods(HttpServletRequest request, HttpServletResponse response, ModelMap model){
 		ResponseBuilder rb = new ResponseBuilder();
+		int id = Integer.parseInt(request.getParameter("Goods_ID"));
 		
-		if(list == null){
-			return;
-		}
-		list = goodService.getGoodsList();
+		GoodsDO gd = goodService.getGoodsList(id);
+		String name = gd.getName();
 		try{
-			rb.writeJsonResponse(response, list);
+			rb.writeJsonResponse(response, name);
 		}catch(IOException e){
 			
 		}
