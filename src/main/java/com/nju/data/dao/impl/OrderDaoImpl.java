@@ -92,6 +92,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao{
 		if (sess != null) {
 			String sql = "from OrderDO o where o.createTime between :firstDate and :endDate";
 			String sql1 = "select o.remark, count(*) from OrderDO o where createTime between :firstDate and :endDate group by o.remark order by count(*) desc";
+			System.out.println(sql1);
 			l1 = sess.createQuery(sql1).setString("firstDate", dateBegin).setString("endDate", dateEnd).list();
 
 
