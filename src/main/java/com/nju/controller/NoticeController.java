@@ -23,12 +23,13 @@ public class NoticeController {
     @RequestMapping(value = "/notice", method = RequestMethod.POST)
     public void getLocationRank(HttpServletRequest request, HttpServletResponse response, ModelMap model){
         ResponseBuilder rb = new ResponseBuilder();
-        String rankTop = request.getParameter("rankTop");
-        String rankEnd = request.getParameter("rankEnd");
-        String beginDate = request.getParameter("beginDate");
-        String endDate = request.getParameter("endDate");
-        String result = "rankTop"+rankTop+"rankEnd"+rankEnd+"beginDate"+beginDate+"endDate"+endDate;
-        //String result = noticeService.getHistoryLocation(Integer.parseInt(rankTop),Integer.parseInt(rankEnd),beginDate,endDate);
+        String rankTop = request.getParameter("rankTop")==null?"":request.getParameter("rankTop");
+        String rankEnd = request.getParameter("rankEnd")==null?"":request.getParameter("rankEnd");
+        String beginDate = request.getParameter("beginDate")==null?"":request.getParameter("beginDated");
+        String endDate = request.getParameter("endDate")==null?"":request.getParameter("endDate");
+
+        //String result = "rankTop"+rankTop+"rankEnd"+rankEnd+"beginDate"+beginDate+"endDate"+endDate;
+        String result = noticeService.getHistoryLocation(Integer.parseInt(rankTop),Integer.parseInt(rankEnd),beginDate,endDate);
 
         try {
             rb.writeJsonResponse(response, result);
